@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.13",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
@@ -36,6 +37,7 @@
     "@stylistic/eslint-plugin-ts": "^4.2.0",
     "@swc/core": "^1.11.22",
     "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
     "@types/find": "^0.2.4",
     "@types/fs-extra": "^11.0.4",
     "@types/jasmine": "^5.1.7",

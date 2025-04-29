@@ -3,6 +3,7 @@ import path from 'path';
 import helmet from 'helmet';
 import express, { Request, Response, NextFunction, Router } from 'express';
 import logger from 'jet-logger';
+import cors from 'cors';
 
 import BaseRouter from '@src/routes';
 
@@ -32,6 +33,7 @@ export const arr: NumberItem[] = Array.from({ length: 1000000 }, (_, i) => ({ va
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 
 // Show routes called in console during development
 if (ENV.NodeEnv === NodeEnvs.Dev) {

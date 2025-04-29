@@ -13,18 +13,21 @@ export interface GetNumbersResponse {
   total: number;
 }
 
+// Получить базовый адрес API из переменной окружения или по умолчанию
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 // Получить список чисел с пагинацией и поиском
 export async function fetchNumbers(page = 1, limit = 10, search = ""): Promise<GetNumbersResponse> {
   const params = new URLSearchParams({ page: String(page), limit: String(limit) });
   if (search) params.append("search", search);
-  const resp = await fetch(`/api/numbers?${params.toString()}`);
+  const resp = await fetch(`${API_BASE}/api/numbers?${params.toString()}`);
   if (!resp.ok) throw new Error("Ошибка загрузки чисел");
   return resp.json();
 }
 
 // Переместить элемент на новую позицию
 export async function replaceNumber(item: number, newPosition: number): Promise<{ success: boolean }> {
-  const resp = await fetch(`/api/numbers/replace`, {
+  const resp = await fetch(`${API_BASE}/api/numbers/replace`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ item, newPosition })
@@ -35,7 +38,7 @@ export async function replaceNumber(item: number, newPosition: number): Promise<
 
 // Переключить checked у элемента
 export async function toggleChecked(item: number): Promise<{ success: boolean; value: number; checked: boolean }> {
-  const resp = await fetch(`/api/numbers/${item}/toggle`, { method: "PATCH" });
+  const resp = await fetch(`${API_BASE}/api/numbers/${item}/toggle`, { method: "PATCH" });
   if (!resp.ok) throw new Error("Ошибка переключения чекбокса");
   return resp.json();
 }
